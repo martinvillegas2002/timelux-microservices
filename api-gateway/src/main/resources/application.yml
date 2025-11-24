@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      # Configuración CORS para que React (puerto 5173) pueda entrar
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+      # Las Rutas a tus microservicios
+      routes:
+        # Ruta 1: Autenticación
+        - id: auth-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/auth/**
+        
+        # Ruta 2: Catálogo de Productos
+        - id: catalog-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/products/**
