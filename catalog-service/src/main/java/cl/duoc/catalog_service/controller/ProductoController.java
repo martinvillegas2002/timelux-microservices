@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products") // Coincide con la ruta del Gateway
-@CrossOrigin(origins = "*") //Permite peticiones desde cualquier lado (React)
 public class ProductoController {
 
     @Autowired
