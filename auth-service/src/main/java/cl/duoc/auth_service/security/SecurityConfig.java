@@ -19,6 +19,10 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 // Permitir acceso total a las rutas de autenticación (login/register)
                 .requestMatchers("/api/auth/**").permitAll()
+                // --- NUEVAS: Permisos para Swagger ---
+                .requestMatchers("/v3/api-docs/**").permitAll()
+                .requestMatchers("/swagger-ui/**").permitAll()
+                .requestMatchers("/swagger-ui.html").permitAll()
                 // Cualquier otra cosa requiere autenticación (aunque el Gateway manejará esto)
                 .anyRequest().authenticated()
             );
